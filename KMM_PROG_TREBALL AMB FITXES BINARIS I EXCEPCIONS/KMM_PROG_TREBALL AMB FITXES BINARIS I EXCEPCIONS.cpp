@@ -7,7 +7,7 @@
 
 using namespace std;
 
-// Definicion de la estructura Pelicula
+// Definició de l'estructura Pelicula
 struct Pelicula {
     string titol;
     int any_estrena;
@@ -15,11 +15,11 @@ struct Pelicula {
     int personatges_per_escena;
 };
 
-// Funcion para desear las datos al fitxer
+// Funció per desar les dades al fitxer
 void desar_dades(const vector<Pelicula>& pelicules) {
     ofstream fitxer("pelicules_dades.bin", ios::binary);
     if (!fitxer.is_open()) {
-        throw runtime_error("No se ha podido abrir el fitxer para la escritura.");
+        throw runtime_error("No s'ha pogut obrir el fitxer per a l'escriptura.");
     }
 
     for (const Pelicula& pelicula : pelicules) {
@@ -27,7 +27,7 @@ void desar_dades(const vector<Pelicula>& pelicules) {
     }
 }
 
-// Funcion para cargar las datos del fitxer
+// Funció per carregar les dades del fitxer
 vector<Pelicula> carregar_dades() {
     vector<Pelicula> pelicules;
     ifstream fitxer("pelicules_dades.bin", ios::binary);
@@ -43,13 +43,13 @@ vector<Pelicula> carregar_dades() {
     return pelicules;
 }
 
-// Funcion para añadir una nueva pelicula
+// Funció per afegir una nova pel·lícula
 void afegir_pelicula(vector<Pelicula>& pelicules, const string& titol, int any_estrena, int num_escenes, int personatges_per_escena) {
     pelicules.push_back({ titol, any_estrena, num_escenes, personatges_per_escena });
     desar_dades(pelicules);
 }
 
-// Funcion para eliminar una pelicula
+// Funció per eliminar una pel·lícula
 void eliminar_pelicula(vector<Pelicula>& pelicules, const string& titol) {
     pelicules.erase(remove_if(pelicules.begin(), pelicules.end(),
         [&titol](const Pelicula& p) { return p.titol == titol; }),
@@ -57,10 +57,10 @@ void eliminar_pelicula(vector<Pelicula>& pelicules, const string& titol) {
     desar_dades(pelicules);
 }
 
-// Funcion para calcular las estadisticas de las peliculas
+// Funció per calcular les estadístiques de les pel·lícules
 void calcular_estadisticas(const vector<Pelicula>& pelicules) {
     if (pelicules.empty()) {
-        cout << "No hay datos disponibles." << endl;
+        cout << "No hi ha dades disponibles." << endl;
         return;
     }
 
@@ -101,19 +101,19 @@ int main() {
     vector<Pelicula> pelicules = carregar_dades();
 
     while (true) {
-        cout << "\n1. Afegir pelicula" << endl;
-        cout << "2. Esborrar pelicula" << endl;
-        cout << "3. Calcular estadisticas" << endl;
+        cout << "\n1. Afegir pel·lícula" << endl;
+        cout << "2. Esborrar pel·lícula" << endl;
+        cout << "3. Calcular estadístiques" << endl;
         cout << "4. Sortir" << endl;
 
         int opcio;
-        cout << "Selecciona una opcion: ";
+        cout << "Selecciona una opció: ";
         cin >> opcio;
 
         if (opcio == 1) {
             string titol;
             int any_estrena, num_escenes, personatges_per_escena;
-            cout << "Introdueix el titol de la pelicula: ";
+            cout << "Introdueix el títol de la pel·lícula: ";
             cin.ignore();
             getline(cin, titol);
             cout << "Introdueix l'any d'estrena: ";
@@ -126,7 +126,7 @@ int main() {
         }
         else if (opcio == 2) {
             string titol;
-            cout << "Introdueix el titol de la pelicula a esborrar: ";
+            cout << "Introdueix el títol de la pel·lícula a esborrar: ";
             cin.ignore();
             getline(cin, titol);
             eliminar_pelicula(pelicules, titol);
@@ -138,7 +138,7 @@ int main() {
             break;
         }
         else {
-            cout << "Opcion no valida." << endl;
+            cout << "Opció no vàlida." << endl;
         }
     }
 
